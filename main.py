@@ -22,18 +22,17 @@ def send_help(message):
 
 def weather_request(message):
     val = str(message.text)
-    print(message)
-    if message.startswith("weather") and len(message.split())>=2:
+    if val.startswith("weather") and len(val.split())>=2:
         print("in if block---")
         return True
     else:
         print("else portion --")
         return False
 
-@bot.message_handler(func=lambda message: True)
+@bot.message_handler(func=weather_request)
 def send_weather(message):
     val = str(message.text)
     city = val.replace("weather ", "")
-    bot.send_message(message.chat.id, "Weather in"+city+" is: 40 degree")
+    bot.send_message(message.chat.id, "Weather in "+city+" is: 40 degree")
 
 bot.polling()
